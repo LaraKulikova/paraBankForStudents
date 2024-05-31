@@ -18,16 +18,27 @@ public class MainFactoryTest extends BasicFactoryTest {
         boolean actualResult = mainFactoryPage.isMainLogoDisplayed();
         Assert.assertEquals(actualResult, true, "Main Logo isn't visible");
     }
-
+/*МОЙ ТЕСТ*/
     @Test (description = "Test error message when Username is empty and Password is entered")
     public void testErrorMessageWhenUsernameIsEmpty() {
-        String username = "";//если оставить поле пустым 1 задание, если внести любое имя - 2
+        String username = "";
         String password = "123456";
-        mainFactoryPage.clickOnAdminLogo(); // Navigate to Admin login page
-        // Enter Password without entering Username
-        mainFactoryPage.enterUsername(username); // Leave Username field empty
+        mainFactoryPage.clickOnAdminLogo();
+        mainFactoryPage.enterUsername(username);
         mainFactoryPage.enterPassword(password);
         mainFactoryPage.clickOnLoginButton();
-        // Verify error message is displayed
-        Assert.assertTrue(mainFactoryPage.isErrorMessageDisplayed(), "Error message is not displayed");
-}}
+        Assert.assertTrue(mainFactoryPage.isErrorMessageDisplayed(), "Error! Please enter a username and password.");
+    }
+
+    @Test (description = "An attempt to log in by an unregistered user!")
+    public void notRegisteredUsetEnterError() {
+        String username = "Larisa";
+        String password = "123456";
+        mainFactoryPage.clickOnAdminLogo();
+        mainFactoryPage.enterUsername(username);
+        mainFactoryPage.enterPassword(password);
+        mainFactoryPage.clickOnLoginButton();
+        Assert.assertTrue(mainFactoryPage.isErrorMessageDisplayed(), "Error! The username and password could not be verified.");
+    }
+
+}
